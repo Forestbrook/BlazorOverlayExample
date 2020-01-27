@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorExample.Client.Services;
 
 namespace BlazorExample.Client.Abstractions
 {
     public interface IOverlay
     {
-        void Close();
-        void Show(RenderFragment content);
+        void Close(OverlayContent overlayContent);
+        void Show(OverlayContent overlayContent);
     }
 }

@@ -7,9 +7,11 @@ namespace BlazorExample.Client.Components
 {
     public partial class Overlay : ComponentBase, IOverlay, IDisposable
     {
-        private RenderFragment Content { get; set; }
+        private RenderFragment Content => OverlayContent?.Content;
 
         private bool IsVisible { get; set; }
+
+        private OverlayContent OverlayContent { get; set; }
 
         [Inject]
         private OverlayService OverlayService { get; set; }
@@ -17,21 +19,36 @@ namespace BlazorExample.Client.Components
         protected override void OnInitialized()
             => OverlayService.Connect(this);
 
-        public void Show(RenderFragment content)
+        public void Show(OverlayContent overlayContent)
         {
-            Content = content;
+            if (OverlayContent != null)
+                throw new InvalidOperationException($"Show {overlayContent.ComponentTypeName} while {OverlayContent.ComponentTypeName} not yet closed.");
+
+            OverlayContent = overlayContent;
             IsVisible = true;
             StateHasChanged();
         }
 
         public void Close()
+            => OverlayContent?.Close();
+
+        public void Close(OverlayContent overlayContent)
         {
+            // Check for already closed:
+            if (overlayContent != OverlayContent)
+                return;
+
+            OverlayContent = null;
             IsVisible = false;
-            Content = null;
             StateHasChanged();
         }
 
         public void Dispose()
-            => OverlayService.Disconnect(this);
+        {
+            OverlayService.Disconnect(this);
+            var overlayContent = OverlayContent;
+            OverlayContent = null;
+            overlayContent?.Close();
+        }
     }
 }

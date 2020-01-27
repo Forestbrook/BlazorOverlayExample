@@ -1,4 +1,4 @@
-﻿@inject IOverlayService OverlayService
+﻿@using BlazorExample.Client.Services
 
 <div class="simple-form">
     <div class="simple-form-header">
@@ -28,13 +28,17 @@
 </div>
 
 @code {
+
+    [Parameter]
+    public OverlayContent OverlayContent { get; set; }
+
     bool ShowForm { get; set; } = true;
     string FirstName { get; set; }
     string LastName { get; set; }
     string Title => "Simple Form";
 
     void Close()
-        => OverlayService.Close();
+        => OverlayContent.Close();
 
     void SubmitForm()
     {

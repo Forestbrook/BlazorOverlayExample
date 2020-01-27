@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BlazorExample.Client.Abstractions
 {
     public interface IOverlayService
     {
-        void Close();
-        void Show(Type contentType);
+        void Show<T>() where T : ComponentBase;
     }
 }
