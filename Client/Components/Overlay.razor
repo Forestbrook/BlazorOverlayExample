@@ -1,0 +1,10 @@
+﻿<div class="overlay-container @(IsVisible ? "overlay-active" : string.Empty)">
+
+    <div class="overlay-shield" @onclick="Close">
+    </div>
+
+    <div class="overlay-content">
+        @Content
+    </div>
+
+</div>

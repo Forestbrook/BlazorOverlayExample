@@ -1,0 +1,43 @@
+﻿@inject IOverlayService OverlayService
+
+<div class="simple-form">
+    <div class="simple-form-header">
+        <h3 class="simple-form-title">@Title</h3>
+        <button type="button" class="simple-form-close" @onclick="Close">
+            <span>&times;</span>
+        </button>
+    </div>
+    @if (ShowForm)
+    {
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input bind="@FirstName" type="text" class="form-control" id="first-name" placeholder="Enter first name" />
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input bind="@LastName" type="text" class="form-control" id="last-name" placeholder="Enter last name" />
+        </div>
+        <button @onclick="SubmitForm" class="btn btn-primary">Submit</button>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            Thanks @FirstName @LastName for submitting the form.
+        </div>
+    }
+</div>
+
+@code {
+    bool ShowForm { get; set; } = true;
+    string FirstName { get; set; }
+    string LastName { get; set; }
+    string Title => "Simple Form";
+
+    void Close()
+        => OverlayService.Close();
+
+    void SubmitForm()
+    {
+        ShowForm = false;
+    }
+}
