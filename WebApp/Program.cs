@@ -12,6 +12,7 @@ namespace BlazorExample.WebApp
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+            // Overlay example:
             builder.Services.AddSingleton<OverlayService>();
             builder.Services.AddSingleton<IOverlayService>(sp => sp.GetRequiredService<OverlayService>());
 

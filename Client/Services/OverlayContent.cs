@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
-using System.Threading.Tasks;
 
 namespace BlazorExample.Client.Services
 {
@@ -30,13 +29,6 @@ namespace BlazorExample.Client.Services
             Content = null;
             CloseOverlay(this);
             Closed?.Invoke(this, EventArgs.Empty);
-        }
-
-        public async Task CloseWhenFinished(Task task)
-        {
-            // TODO: Check for TaskCanceledException?
-            await task;
-            Close();
         }
     }
 }

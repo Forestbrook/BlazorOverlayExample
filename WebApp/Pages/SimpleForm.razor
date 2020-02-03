@@ -4,18 +4,18 @@
     <div class="simple-form-header">
         <h3 class="simple-form-title">@Title</h3>
         <button type="button" class="simple-form-close" @onclick="Close">
-            <span>&times;</span>
+            <span>🗙</span>
         </button>
     </div>
     @if (ShowForm)
     {
         <div class="form-group">
             <label for="first-name">First Name</label>
-            <input bind="@FirstName" type="text" class="form-control" id="first-name" placeholder="Enter first name" />
+            <input @bind="FirstName" type="text" class="form-control" id="first-name" placeholder="Enter first name" />
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input bind="@LastName" type="text" class="form-control" id="last-name" placeholder="Enter last name" />
+            <input @bind="LastName" type="text" class="form-control" id="last-name" placeholder="Enter last name" />
         </div>
         <button @onclick="SubmitForm" class="btn btn-primary">Submit</button>
     }
